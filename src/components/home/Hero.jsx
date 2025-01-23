@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import AnimatedBackground from './DynamicBackground';
 import { Github, Linkedin, Twitter, Facebook } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     const socialLinks = [
@@ -103,13 +104,15 @@ const Hero = () => {
             variants={itemVariants}
             className="text-center mt-8"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-transparent border-2 border-cyan-400 text-cyan-400 rounded-lg hover:bg-cyan-400/10 transition-all duration-500"
-            >
-              View My Projects
-            </motion.button>
+            <Link to="/work">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 bg-transparent border-2 border-cyan-400 text-cyan-400 rounded-lg hover:bg-cyan-400/10 transition-all duration-500"
+              >
+                View My Projects
+              </motion.button>
+            </Link>
           </motion.div>
       </div>
     </div>
