@@ -1,29 +1,29 @@
 // src/components/home/Hero.jsx
 import { motion } from 'framer-motion';
 import AnimatedBackground from './DynamicBackground';
-import { Github, Linkedin, Twitter, Mail } from 'lucide-react';
+import { Github, Linkedin, Twitter, Facebook } from 'lucide-react';
 
 const Hero = () => {
     const socialLinks = [
         {
           name: 'GitHub',
           icon: <Github size={20} />,
-          url: 'https://github.com/YourUsername'
+          url: 'https://github.com/Indra-photon'
         },
         {
           name: 'LinkedIn',
           icon: <Linkedin size={20} />,
-          url: 'https://linkedin.com/in/YourUsername'
+          url: 'https://www.linkedin.com/in/indranil-maiti-7542941b7/'
         },
         {
           name: 'Twitter',
           icon: <Twitter size={20} />,
-          url: 'https://twitter.com/YourUsername'
+          url: 'https://x.com/Nil_phy_dreamer'
         },
         {
-          name: 'Email',
-          icon: <Mail size={20} />,
-          url: 'mailto:your.email@example.com'
+          name: 'Facebook',
+          icon: <Facebook size={20} />,
+          url: 'https://www.facebook.com/indranil.maiti.564/'
         }
       ];
 

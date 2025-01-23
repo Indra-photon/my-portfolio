@@ -1,60 +1,83 @@
 // src/components/home/Contact.jsx
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import DynamicBackground from './DynamicBackground';
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Github, Linkedin, Facebook, Twitter } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import toast from 'react-hot-toast';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
+  const form = useRef();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // This is where you'll add your form submission logic later
-    console.log('Form data:', formData);
-    
-    // Simulate submission
-    setTimeout(() => {
+    try {
+      const result = await emailjs.sendForm(
+        import.meta.env.VITE_EMAIL_SERVICE_ID,
+        import.meta.env.VITE_EMAIL_TEMPLATE_ID,
+        form.current,
+        {
+          publicKey: import.meta.env.VITE_EMAIL_PUBLIC_KEY,
+        }
+      );
+      
+      if (result.status === 200) {
+        toast.success('Message sent successfully!', {
+          duration: 4000,
+          style: {
+            background: '#0a192f',
+            color: '#fff',
+            border: '1px solid #22d3ee',
+          },
+          iconTheme: {
+            primary: '#22d3ee',
+            secondary: '#0a192f',
+          },
+        });
+        form.current.reset();
+      }
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast.error('Failed to send message. Please try again.', {
+        duration: 4000,
+        style: {
+          background: '#0a192f',
+          color: '#fff',
+          border: '1px solid #ef4444',
+        },
+        iconTheme: {
+          primary: '#ef4444',
+          secondary: '#0a192f',
+        },
+      });
+    } finally {
       setIsSubmitting(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 1000);
+    }
   };
 
   const socialLinks = [
     {
       name: 'GitHub',
       icon: <Github className="w-6 h-6" />,
-      url: 'https://github.com/YourUsername'
+      url: 'https://github.com/Indra-photon'
     },
     {
       name: 'LinkedIn',
       icon: <Linkedin className="w-6 h-6" />,
-      url: 'https://linkedin.com/in/YourUsername'
+      url: 'https://www.linkedin.com/in/indranil-maiti-7542941b7/'
     },
     {
       name: 'Twitter',
       icon: <Twitter className="w-6 h-6" />,
-      url: 'https://twitter.com/YourUsername'
+      url: 'https://x.com/Nil_phy_dreamer'
     },
     {
-      name: 'Email',
-      icon: <Mail className="w-6 h-6" />,
-      url: 'mailto:your.email@example.com'
+      name: 'Facebook',
+      icon: <Facebook className="w-6 h-6" />,
+      url: 'https://www.facebook.com/indranil.maiti.564/'
     }
   ];
 
@@ -84,27 +107,27 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form 
+              ref={form} 
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+            >
               <div>
-                <label htmlFor="name" className="block text-gray-300 mb-2">Name</label>
+                <label htmlFor="user_name" className="block text-gray-300 mb-2">Name</label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  id="user_name"
+                  name="user_name"
                   required
                   className="w-full px-4 py-3 bg-dark-secondary/30 border border-cyan-400/20 rounded-lg focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all duration-300 text-white backdrop-blur-sm"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-gray-300 mb-2">Email</label>
+                <label htmlFor="user_email" className="block text-gray-300 mb-2">Email</label>
                 <input
                   type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  id="user_email"
+                  name="user_email"
                   required
                   className="w-full px-4 py-3 bg-dark-secondary/30 border border-cyan-400/20 rounded-lg focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all duration-300 text-white backdrop-blur-sm"
                 />
@@ -114,13 +137,12 @@ const Contact = () => {
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   required
                   rows="5"
                   className="w-full px-4 py-3 bg-dark-secondary/30 border border-cyan-400/20 rounded-lg focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all duration-300 text-white backdrop-blur-sm"
                 ></textarea>
               </div>
+              
               <button
                 type="submit"
                 disabled={isSubmitting}
@@ -162,7 +184,7 @@ const Contact = () => {
             <div className="bg-dark-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-cyan-400/20">
               <h3 className="text-2xl font-semibold text-gray-200 mb-4">Location</h3>
               <p className="text-gray-300">
-                Based in Your City, Country<br />
+                Torun, Poland<br />
                 Open to Remote Opportunities
               </p>
             </div>
