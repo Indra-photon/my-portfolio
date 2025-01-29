@@ -100,19 +100,15 @@ const About = () => {
             ))}
           </motion.div>
 
-          {/* Additional Info */}
-          <motion.div 
-            variants={itemVariants}
-            className="text-center mt-16"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 bg-transparent border-2 border-cyan-400 text-cyan-400 rounded-lg hover:bg-cyan-400/10 transition-all duration-500"
-            >
-              View My Projects
-            </motion.button>
-          </motion.div>
+          <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="text-cyan-400 text-xl mb-1 text-center"
+        >
+          If you have any idea or tech related problems in your business, ping me up and lets work together to find solutions
+          
+        </motion.div>
         </motion.div>
       </div>
     </section>

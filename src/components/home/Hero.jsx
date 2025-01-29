@@ -76,8 +76,10 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="text-cyan-400 text-xl mb-1 text-center"
         >
-          Specialized in MERN Stack
+          Specialized in MERN Stack <br />
+          
         </motion.div>
+        
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

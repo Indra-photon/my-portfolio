@@ -6,6 +6,7 @@ import ProjectCard from '../components/work/ProjectCard';
 import pic1 from '../../src/assets/portfolio_pr_dubai.png'
 import pic2 from '../../src/assets/avoron.png'
 import pic3 from '../../src/assets/photographer-site.png'
+import pic4 from '../../src/assets/Luxestore.png'
 
 const categories = ['Freelance Projects', 'My Projects', 'SaaS Websites'];
 
@@ -42,10 +43,22 @@ const Work = () => {
     },
   ];
 
+  const myProjects = [
+    {
+      id: 1,
+      title: "Luxe Store, ",
+      description: "A Fully functional E-commerce website with payment integration, and admin dashboard ",
+      techStack: ["React", "Tailwind CSS", "Node", "Express", "MongoDB"],
+      liveLink: "https://e-commerce-smoky-omega.vercel.app/",
+      image: pic4,
+      category: "Full Stack"
+    },
+  ]
+
   // This will be expanded later with more projects
   const projects = {
     'Freelance Projects': freelanceProjects,
-    'My Projects': [],
+    'My Projects': myProjects,
     'SaaS Websites': []
   };
 
